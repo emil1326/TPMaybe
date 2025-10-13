@@ -44,13 +44,13 @@ function showBookmarks() {
     $('#bookmarkForm').hide();
     $('#aboutContainer').hide();
     $("#createBookmark").show();
-    $('#aboutCmd').show()
+    $('#categoriesMenu').show()
     Bookmarks_API.resume_Periodic_Refresh();
 }
 function hideBookmarks() {
     $("#scrollPanel").hide();
     $("#createBookmark").hide();
-    $('#aboutCmd').hide();
+    $('#categoriesMenu').hide();
     $("#abort").show();
     Bookmarks_API.stop_Periodic_Refresh();
 }
@@ -194,11 +194,7 @@ async function renderDeleteBookmarkForm(id) {
                             </div>
                             <span class="BookmarkCategory">${Bookmark.Category}</span>
                         </div>
-                        <div class="BookmarkCommandPanel">
-                            <span class="editCmd cmdIcon fa fa-pencil" editBookmarkId="${Bookmark.Id}" title="Modifier ${Bookmark.Title}"></span>
-                            <span class="deleteCmd cmdIcon fa fa-trash" deleteBookmarkId="${Bookmark.Id}" title="Effacer ${Bookmark.Title}"></span>
-                        </div>
-                    </div>
+                     </div>
                 </div>   
                 <br>
                 <input type="button" value="Effacer" id="deleteBookmark" class="btn btn-primary">
