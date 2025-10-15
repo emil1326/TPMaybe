@@ -93,7 +93,7 @@ export default class APIServer {
     startupMessage() {
         console.log(FgCyan, "*************************************");
         console.log(FgCyan, `* API SERVER - version beta - ${api_server_version}   *`);
-        console.log(FgCyan, `* Release date: ${api_server_release}      *`);
+        console.log(FgCyan, `* Release date: ${api_server_release}        *`);
         console.log(FgCyan, "*************************************");
         console.log(BgCyan + FgWhite, `HTTP Server running on ${os.hostname()} and listening port ${this.port}...`);
         console.log(BgCyan + FgWhite, `Server time zone UTC-${Server_UTC_Offset} `);
