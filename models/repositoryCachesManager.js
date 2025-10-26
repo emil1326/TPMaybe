@@ -25,7 +25,7 @@ export default class RepositoryCachesManager {
     }
     static startCachedRepositoriesCleaner() {
         // periodic cleaning of expired cached repository data
-        setInterval(RepositoryCachesManager.flushExpired, repositoryCachesExpirationTime * 1000);
+        setInterval(RepositoryCachesManager.flushExpired, repositoryCachesExpirationTime / 2 * 1000);
         console.log(BgWhite + FgBlue, "[Periodic cached repositories data cleaning process started...]");
 
     }

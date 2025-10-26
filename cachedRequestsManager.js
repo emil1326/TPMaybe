@@ -27,7 +27,7 @@ export default class CachedRequestsManager {
     }
     static startCachedRequestsCleaner() {
         // periodic cleaning of expired cached requests
-        setInterval(CachedRequestsManager.flushExpired, requestCacheExpirationTime * 1000);
+        setInterval(CachedRequestsManager.flushExpired, requestCacheExpirationTime / 2 * 1000);
         console.log(BgCyan + FgWhite, "Periodic cached requests content cleaning process started...");
     }
     static find(url) {
