@@ -4,7 +4,7 @@ let pageManager;
 Init_UI();
 
 function Init_UI() {
-    pageManager = new PageManager('scrollPanel', 'wordsPanel', 'sample', renderWords);
+    pageManager = new PageManager('scrollPanel', 'wordsPanel', 'sample', renderPosts);
     $("#actionTitle").text("Mots");
     $("#search").show();
     $("#abort").hide();
@@ -57,16 +57,16 @@ function renderError(message) {
         `)
     );
 }
-async function renderWords(container, queryString) {
+async function renderPosts(container, queryString) {
     if (search != "") queryString += "&keywords=" + search;
     addWaitingGif();
     let endOfData = true;
-    let words = await API.getWords(queryString);
+    let posts = await API.getPosts(queryString);
     if (API.error)
         renderError(API.currentHttpError);
     else
-        if (words.length > 0) {
-            words.forEach(word => { container.append(renderWord(word)); });
+        if (posts.length > 0) {
+            posts.forEach(post => { container.append(renderPost(post)); });
             endOfData = false;
         } else console.log('end of data')
     removeWaitingGif();

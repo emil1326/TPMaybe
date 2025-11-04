@@ -6,7 +6,7 @@
     <meta author="Nicolas Chourot">
     <meta http-equiv="Content-Type" content="text/html; charset= ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Weird Dictionary</title>
+    <title>Super Quebec Nouvelles</title>
     <style>
         .mainContainer {
             display: flex;
@@ -231,7 +231,7 @@
     function webAPI_GET(queryString) {
         return new Promise(resolve => {
             $.ajax({
-                url: "http://localhost:5000/api/words" + queryString,
+                url: "http://localhost:5000/api/posts" + queryString,
                 type: 'GET',
                 contentType: 'text/plain',
                 data: {},

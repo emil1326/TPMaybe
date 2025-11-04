@@ -1,5 +1,5 @@
-//const API_URL = "https://api-server-2025.azurewebsites.net/api/words";
-const API_URL = "http://localhost:5000/api/words";
+//const API_URL = "https://api-server-2025.azurewebsites.net/api/posts";
+const API_URL = "http://localhost:5000/api/posts";
 class API {
     static initHttpState() {
         this.currentHttpError = "";
@@ -15,40 +15,40 @@ class API {
         this.error = true;
     }
 
-    static getWords(query = "") {
+    static getPosts(query = "") {
         API.initHttpState();
         return new Promise(resolve => {
             $.ajax({
                 url: API_URL + query,
-                success: words => { resolve(words); },
+                success: posts => { resolve(posts); },
                 error: (xhr) => { API.setHttpErrorState(xhr); resolve(null); }
             });
         });
     }
-    static getWord(wordId) {
+    static getPost(postId) {
         API.initHttpState();
         return new Promise(resolve => {
             $.ajax({
-                url: API_URL + "/" + wordId,
-                success: word => { resolve(word); },
+                url: API_URL + "/" + postId,
+                success: post => { resolve(post); },
                 error: (xhr) => { API.setHttpErrorState(xhr); resolve(null); }
             });
         });
     }
-    static saveWord(word, create) {
+    static savePost(post, create) {
         API.initHttpState();
         return new Promise(resolve => {
             $.ajax({
-                url: create ? API_URL : API_URL + "/" + word.Id,
+                url: create ? API_URL : API_URL + "/" + post.Id,
                 type: create ? "POST" : "PUT",
                 contentType: 'application/json',
-                data: JSON.stringify(word),
+                data: JSON.stringify(post),
                 success: (/*data*/) => { resolve(true); },
                 error: (xhr) => { API.setHttpErrorState(xhr); resolve(null); }
             });
         });
     }
-    static deleteWord(id) {
+    static deletePost(id) {
         API.initHttpState();
         return new Promise(resolve => {
             $.ajax({
