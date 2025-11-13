@@ -5,6 +5,10 @@ import APIServer from "./api-server.js";
 
 import RouteRegister from './router.js';
 RouteRegister.add('GET', 'Bookmarks', 'list');
+RouteRegister.add('GET', 'Posts');
+RouteRegister.add('POST', 'Posts');
+RouteRegister.add('PUT', 'Posts');
+RouteRegister.add('DELETE', 'Posts');
 
 let server = new APIServer();
 server.start();

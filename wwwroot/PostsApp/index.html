@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Quebec Nouvelles</title>
 
-    <link rel="site.webmanifest" href="manifest.json" />
-    <link rel="icon" href="dict-logo.png">
+    <link rel="site.webmanifest" href="site.webmanifest" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="css/site.css">
-    <link rel="stylesheet" href="css/words.css">
 </head>
 
 <body>
     <div id="main">
         <div id="header">
-            <img src="dict-logo.png" class="appLogo" alt="" title="Dictionnaire de mots">
-            <h4 id="actionTitle">Mots</h4>
+            <h4 id="actionTitle">Nouvelles</h4>
 
             <div id="search">
-                <input type="search" id="searchKey" placeholder="Mots-clés" />
+                <input type="search" id="searchKey" placeholder="Rechercher..." />
                 <i for="searchKey" id="doSearch" class="cmdIcon fa fa-search"></i>
             </div>
 
+            <i id="createPost" class="cmdIcon fa fa-plus" title="Ajouter une nouvelle"></i>
             <i id="abort" class="cmdIcon fa fa-times" title="Annuler"></i>
             <div class="dropdown ms-auto">
                 <div data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,35 +38,39 @@
         </div>
         <div id="content">
             <div id="scrollPanel">
-                <div id="wordsPanel" class="wordsContainer">
+                <div id="postsPanel" class="postsContainer">
                     <!-- Used for items size -->
-                    <div id="sample" class="wordRow">
-                        <div class="wordContainer ">
-                            <div class="wordLayout">
-                                <div></div>
-                                <div class="wordInfo">
-                                    <span class="word">sample</span>
-                                    <span class="wordDef">sample def</span>
+                    <div id="sample" class="postRow">
+                        <div class="postContainer">
+                            <div class="postLayout">
+                                <div class="postHeader">
+                                    <span class="category">Catégorie</span>
+                                    <span class="date">Date</span>
                                 </div>
+                                <h3 class="title">Titre sample</h3>
+                                <img src="" class="postImage">
+                                <p class="description">Description sample</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div id='formContainer' class="formContainer">
+            </div>
             <div id='aboutContainer' class="aboutContainer">
-                <h2>Super Quebec Nouvelles</h2>
+                <h2>Super Québec Nouvelles</h2>
                 <hr>
                 <br>
                 <p>
                     Petite application à titre de démonstration
                     d'interface utilisateur monopage réactive avec
-                    défilement infinie de nouvelles.
+                    défilement infini de nouvelles.
                 </p>
                 <p>
                     Auteur: Nicolas Chourot, Emilien Devauchelle, Jonathan Basque
                 </p>
                 <p>
-                    Collège Lionel-Groulx, automne 2023
+                    Collège Lionel-Groulx, automne 2025
                 </p>
             </div>
             <div id="errorContainer" class="errorContainer">
@@ -80,6 +82,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="js/ImageControl.js"></script>
     <script src="js/API_Posts.js"></script>
     <script src="js/pageManager.js"></script>
     <script src="js/validation.js"></script>
