@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/1a97986d-d15e-444b-82f8-6e195f07a31c/resourceGroups/nodejsnewresgremil/providers/Microsoft.Web/sites/EmilsNodeJSTest1",
+    "appService.deploySubpath": "."
+}

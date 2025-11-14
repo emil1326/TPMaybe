@@ -1,4 +1,4 @@
-//const API_URL = "https://api-server-2025.azurewebsites.net/api/posts";
+// const API_URL = "https://emilsnodejstest1.azurewebsites.net/api/posts";
 const API_URL = "http://localhost:5000/api/posts";
 class API {
     static initHttpState() {
