@@ -126,18 +126,34 @@ function convertToFrenchDate(timestamp) {
     return date.toLocaleDateString('fr-FR', options);
 }
 
+function highlightText(text) {
+    if (!search || search.trim() === "") return text;
+    
+    const keywords = search.split(',').map(k => k.trim()).filter(k => k !== "");
+    let highlightedText = text;
+    
+    keywords.forEach(keyword => {
+        if (keyword) {
+            const regex = new RegExp(`(${keyword})`, 'gi');
+            highlightedText = highlightedText.replace(regex, '<span style="background-color: yellow;">$1</span>');
+        }
+    });
+    
+    return highlightedText;
+}
+
 function renderPost(post) {
     const postRow = $(`
         <div class="postRow" post_id="${post.Id}">
             <div class="postContainer">
                 <div class="postLayout">
                     <div class="postHeader">
-                        <span class="category">${post.Category}</span>
+                        <span class="category">${highlightText(post.Category)}</span>
                         <span class="date">${convertToFrenchDate(post.Creation)}</span>
                     </div>
-                    <h3 class="title">${post.Title}</h3>
+                    <h3 class="title">${highlightText(post.Title)}</h3>
                     <img src="${post.Image}" class="postImage" alt="${post.Title}">
-                    <p class="description">${post.Text}</p>
+                    <p class="description">${highlightText(post.Text)}</p>
                     <div class="commandPanel">
                         <i class="cmdIcon fa fa-pencil editCmd" editPostId="${post.Id}" title="Modifier"></i>
                         <i class="cmdIcon fa fa-trash deleteCmd" deletePostId="${post.Id}" title="Supprimer"></i>
@@ -181,12 +197,12 @@ async function renderPostDetails(id) {
         $('#formContainer').append(`
             <div class="postDetailsView">
                 <div class="postDetailsHeader">
-                    <span class="category">${post.Category}</span>
+                    <span class="category">${highlightText(post.Category)}</span>
                     <span class="date">${convertToFrenchDate(post.Creation)}</span>
                 </div>
-                <h2 class="detailsTitle">${post.Title}</h2>
+                <h2 class="detailsTitle">${highlightText(post.Title)}</h2>
                 <img src="${post.Image}" class="detailsImage" alt="${post.Title}">
-                <div class="detailsText">${post.Text}</div>
+                <div class="detailsText">${highlightText(post.Text)}</div>
             </div>
         `);
     } else {
@@ -231,12 +247,12 @@ async function renderDeletePostForm(id) {
                     <div class="postContainer">
                         <div class="postLayout">
                             <div class="postHeader">
-                                <span class="category">${post.Category}</span>
+                                <span class="category">${highlightText(post.Category)}</span>
                                 <span class="date">${convertToFrenchDate(post.Creation)}</span>
                             </div>
-                            <h3 class="title">${post.Title}</h3>
+                            <h3 class="title">${highlightText(post.Title)}</h3>
                             <img src="${post.Image}" class="postImage" alt="${post.Title}">
-                            <p class="description">${post.Text}</p>
+                            <p class="description">${highlightText(post.Text)}</p>
                         </div>
                     </div>
                 </div>
