@@ -281,8 +281,13 @@ export default class collectionFilter {
             let filteredCollection = [];
             for (let item of collection) {
                 let record = "";
-                for (let field of this.model.fields) {
-                    if (field.type == "string")
+                // Pour le modèle Post, chercher uniquement dans Title et Text
+                let searchFields = this.model.getClassName() === "Post" 
+                    ? this.model.fields.filter(f => f.name === "Title" || f.name === "Text")
+                    : this.model.fields.filter(f => f.type === "string");
+                    
+                for (let field of searchFields) {
+                    if (field.type == "string" && item[field.name])
                         record += item[field.name].toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') + " ";
                 }
                 let keep = true;

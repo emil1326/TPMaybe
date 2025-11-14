@@ -148,7 +148,7 @@ function renderPost(post) {
             <div class="postContainer">
                 <div class="postLayout">
                     <div class="postHeader">
-                        <span class="category">${highlightText(post.Category)}</span>
+                        <span class="category">${post.Category}</span>
                         <span class="date">${convertToFrenchDate(post.Creation)}</span>
                     </div>
                     <h3 class="title">${highlightText(post.Title)}</h3>
@@ -197,7 +197,7 @@ async function renderPostDetails(id) {
         $('#formContainer').append(`
             <div class="postDetailsView">
                 <div class="postDetailsHeader">
-                    <span class="category">${highlightText(post.Category)}</span>
+                    <span class="category">${post.Category}</span>
                     <span class="date">${convertToFrenchDate(post.Creation)}</span>
                 </div>
                 <h2 class="detailsTitle">${highlightText(post.Title)}</h2>
@@ -247,7 +247,7 @@ async function renderDeletePostForm(id) {
                     <div class="postContainer">
                         <div class="postLayout">
                             <div class="postHeader">
-                                <span class="category">${highlightText(post.Category)}</span>
+                                <span class="category">${post.Category}</span>
                                 <span class="date">${convertToFrenchDate(post.Creation)}</span>
                             </div>
                             <h3 class="title">${highlightText(post.Title)}</h3>
