@@ -145,8 +145,8 @@
 }
 
 .category {
-    background-color: #0057cc;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
     padding: 4px 12px;
     border-radius: 4px;
     font-size: 0.9rem;

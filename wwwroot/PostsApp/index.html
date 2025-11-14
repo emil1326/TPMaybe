@@ -23,21 +23,30 @@
                 <i for="searchKey" id="doSearch" class="cmdIcon fa fa-search"></i>
             </div>
 
-            <i id="createPost" class="cmdIcon fa fa-plus" title="Ajouter une nouvelle"></i>
-            <i id="abort" class="cmdIcon fa fa-times" title="Annuler"></i>
+            <i id="createPost" class="cmdIcon fa fa-plus ms-auto" title="Ajouter une nouvelle"></i>
+            <i id="abort" class="cmdIcon fa fa-times ms-auto" title="Annuler"></i>
+
             <div id="categoriesMenu" class="dropdown">
+
                 <div data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="cmdIcon fa fa-filter" title="Filtrer par catégorie"></i>
+                    <i class="cmdIcon fa fa-ellipsis-vertical" title="Filtrer par catégorie"></i>
                 </div>
+
                 <div class="dropdown-menu noselect" id="categoriesDD">
                     <!-- categories populated dynamically -->
                     <div class="dropdown-item" id="allCatCmd">
                         <i class="menuIcon fa fa-check mx-2"></i> Toutes les catégories
                     </div>
                 </div>
+                <div class="dropdown-menu noselect">
+                    <div class="dropdown-item" id="aboutCmd">
+                        <i class="menuIcon fa fa-info-circle mx-2"></i> À propos...
+                    </div>
+                </div>
+                
             </div>
 
-            <div class="dropdown ms-auto">
+            <!-- <div class="dropdown ms-auto">
                 <div data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="cmdIcon fa fa-ellipsis-vertical"></i>
                 </div>
@@ -46,7 +55,8 @@
                         <i class="menuIcon fa fa-info-circle mx-2"></i> À propos...
                     </div>
                 </div>
-            </div>
+            </div> -->
+
         </div>
         <div id="content">
             <div id="scrollPanel">

@@ -2,6 +2,8 @@ let contentScrollPosition = 0;
 let search = "";
 let endOfData = false;
 let pageManager;
+let categories = [];
+let selectedCategory = "";
 Init_UI();
 
 function Init_UI() {
@@ -43,6 +45,8 @@ function Init_UI() {
     });
 
     pageManager.reset();
+    // start periodic ETag refresh: when ETag changes, update visible list
+    API.start_Periodic_Refresh(async () => { await pageManager.update(); });
 }
 
 function doSearch() {
@@ -51,6 +55,8 @@ function doSearch() {
 }
 
 function renderAbout() {
+    // pause periodic refresh while showing about
+    API.stop_Periodic_Refresh();
     $("#scrollPanel").hide();
     $('#formContainer').hide();
     $("#abort").show();
@@ -82,6 +88,10 @@ function renderError(message) {
 
 async function renderPosts(container, queryString) {
     if (search != "") queryString += "&keywords=" + search;
+    // sort by category then creation and apply selected category filter
+    queryString += "&sort=category,creation";
+    if (selectedCategory != "") queryString += "&category=" + selectedCategory;
+    compileCategories();
     addWaitingGif();
     let endOfData = true;
     let posts = await API.getPosts(queryString);
@@ -185,10 +195,12 @@ async function renderPostDetails(id) {
 }
 
 function renderCreatePostForm() {
+    API.stop_Periodic_Refresh();
     renderPostForm();
 }
 
 async function renderEditPostForm(id) {
+    API.stop_Periodic_Refresh();
     addWaitingGif();
     let post = await API.getPost(id);
     if (post !== null)
@@ -199,6 +211,7 @@ async function renderEditPostForm(id) {
 }
 
 async function renderDeletePostForm(id) {
+    API.stop_Periodic_Refresh();
     addWaitingGif();
     let post = await API.getPost(id);
     removeWaitingGif();
@@ -241,6 +254,7 @@ async function renderDeletePostForm(id) {
                 $("#scrollPanel").show();
                 $('#formContainer').hide();
                 $("#actionTitle").text("Nouvelles");
+                API.resume_Periodic_Refresh();
                 pageManager.reset();
             } else {
                 renderError("Une erreur est survenue!");
@@ -269,6 +283,8 @@ function getFormData($form) {
 }
 
 function renderPostForm(post = null) {
+    // pause periodic refresh while editing/creating
+    API.stop_Periodic_Refresh();
     $("#scrollPanel").hide();
     $("#abort").show();
     $("#search").hide();
@@ -344,6 +360,7 @@ function renderPostForm(post = null) {
             $("#scrollPanel").show();
             $('#formContainer').hide();
             $("#actionTitle").text("Nouvelles");
+            API.resume_Periodic_Refresh();
             pageManager.reset();
         } else {
             renderError("Une erreur est survenue!");
@@ -357,5 +374,56 @@ function renderPostForm(post = null) {
         $("#scrollPanel").show();
         $('#formContainer').hide();
         $("#actionTitle").text("Nouvelles");
+        API.resume_Periodic_Refresh();
     });
+}
+
+async function updateDropDownMenu() {
+    let DDMenu = $("#categoriesDD");
+    let selectClass = selectedCategory === "" ? "fa-check" : "fa-fw";
+    DDMenu.empty();
+    DDMenu.append($(`
+        <div class="dropdown-item menuItemLayout" id="allCatCmd">
+            <i class="menuIcon fa ${selectClass} mx-2"></i> Toutes les catégories
+        </div>
+        `));
+    DDMenu.append($(`<div class="dropdown-divider"></div>`));
+    categories.forEach(category => {
+        selectClass = selectedCategory === category ? "fa-check" : "fa-fw";
+        DDMenu.append($(`
+            <div class="dropdown-item menuItemLayout category"> 
+                <i class="menuIcon fa ${selectClass} mx-2"></i> ${category}
+            </div>
+        `));
+    })
+    DDMenu.append($(`<div class="dropdown-divider"></div> `));
+    DDMenu.append($(`
+        <div class="dropdown-item menuItemLayout" id="aboutCmd2">
+            <i class="menuIcon fa fa-info-circle mx-2"></i> À propos...
+        </div>
+        `));
+    $('#aboutCmd2').on("click", function () { renderAbout(); });
+    $('#allCatCmd').on("click", function () {
+        selectedCategory = "";
+        updateDropDownMenu();
+        pageManager.reset();
+    });
+    $('.category').on("click", function () {
+        selectedCategory = $(this).text().trim();
+        updateDropDownMenu();
+        pageManager.reset();
+    });
+}
+
+async function compileCategories() {
+    categories = [];
+    let response = await API.GetQuery("?select=category&sort=category");
+    if (!API.error && response && response.data) {
+        let items = response.data;
+        items.forEach(item => {
+            if (item.Category && !categories.includes(item.Category))
+                categories.push(item.Category);
+        })
+        updateDropDownMenu();
+    }
 }
