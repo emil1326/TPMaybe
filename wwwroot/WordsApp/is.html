@@ -126,7 +126,7 @@
     function setLimit() {
         let nbColumns = Math.trunc($("#content").innerWidth() / wordItemLayout.width);
         let nbRows = Math.round($("#content").innerHeight() / wordItemLayout.height);
-        limit = nbRows * nbColumns + nbColumns;
+        limit = Math.max(1, Math.round((nbRows * nbColumns + nbColumns)/5));
     }
     function scrollPosition() {
         return $("#content").scrollTop();

@@ -61,7 +61,7 @@ class PageManager {
         let nbColumns = Math.trunc(this.scrollPanel.innerWidth() / this.itemLayout.width);
         if (nbColumns < 1) nbColumns = 1;
         let nbRows = Math.round(this.scrollPanel.innerHeight() / this.itemLayout.height);
-        this.currentPage.limit = nbRows * nbColumns + nbColumns /* make sure to always have a content overflow */;
+        this.currentPage.limit = Math.max(1, Math.round((nbRows * nbColumns + nbColumns)/5)) /* make sure to always have a content overflow */;
     }
     currentPageToQueryString(append = false) {
         this.setCurrentPageLimit();

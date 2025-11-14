@@ -25,6 +25,18 @@
 
             <i id="createPost" class="cmdIcon fa fa-plus" title="Ajouter une nouvelle"></i>
             <i id="abort" class="cmdIcon fa fa-times" title="Annuler"></i>
+            <div id="categoriesMenu" class="dropdown">
+                <div data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="cmdIcon fa fa-filter" title="Filtrer par catégorie"></i>
+                </div>
+                <div class="dropdown-menu noselect" id="categoriesDD">
+                    <!-- categories populated dynamically -->
+                    <div class="dropdown-item" id="allCatCmd">
+                        <i class="menuIcon fa fa-check mx-2"></i> Toutes les catégories
+                    </div>
+                </div>
+            </div>
+
             <div class="dropdown ms-auto">
                 <div data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="cmdIcon fa fa-ellipsis-vertical"></i>
