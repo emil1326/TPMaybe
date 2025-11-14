@@ -89,7 +89,7 @@ function renderError(message) {
 async function renderPosts(container, queryString) {
     if (search != "") queryString += "&keywords=" + search;
     // sort by creation (desc) then category and apply selected category filter
-    queryString += "&sort=-creation,category";
+    queryString += "&sort=-creation";
     if (selectedCategory != "") queryString += "&category=" + selectedCategory;
     compileCategories();
     addWaitingGif();
